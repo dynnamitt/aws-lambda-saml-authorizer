@@ -1,12 +1,12 @@
-service: aws-lambda-saml-authorizer
+service: cmp-aws-lambda-saml-authorizer
 
 plugins:
   - serverless-dotenv-plugin
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  region: ap-southeast-1
+  runtime: nodejs18.x
+  region: eu-west-1
 
 package:
   include:
