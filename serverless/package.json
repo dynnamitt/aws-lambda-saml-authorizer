@@ -8,9 +8,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.589.0",
     "jsonwebtoken": "^8.5.1",
     "passport-saml": "^3.2.4",
+    "samlify": "^2.8.7",
     "xml2js": "^0.4.22"
   },
   "devDependencies": {

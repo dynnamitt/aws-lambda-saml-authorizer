@@ -1,10 +1,10 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+// const AWS = require('aws-sdk');
 const xml2js = require('xml2js');
 const jwt = require('jsonwebtoken');
 
-const sts = new AWS.STS();
+// const sts = new AWS.STS();
 
 const getAttributeValue = (key, attributes) => {
   const attribute = attributes.find(attr => attr['$'].Name === key);
@@ -25,7 +25,7 @@ const extractUserInfo = samlObject => {
   const email = getAttributeValue('http://schemas.auth0.com/email', attributes);
   const userName = getAttributeValue('http://schemas.auth0.com/username', attributes);
   const displayName = getAttributeValue('http://schemas.auth0.com/name', attributes);
-  
+
   // const roleFromSAML = getAttributeValue('https://aws.amazon.com/SAML/Attributes/Role', attributes);
 
   // Here we can have the logic on determining the role
@@ -48,12 +48,11 @@ module.exports.handler = async (event, context) => {
   const samlObject = await xml2js.parseStringPromise(samlBuffer);
 
   try {
-    // Verifies if SAML assertion is valid
-    await sts.assumeRoleWithSAML({
-      PrincipalArn: process.env.IDENTITY_PROVIDER_ARN,
-      RoleArn: process.env.ROLE_ARN,
-      SAMLAssertion: samlResponse
-    }).promise();
+
+    // TODO: Verifies if SAML assertion is valid
+    console.dir(samlObject)
+    // 
+
 
     const userInfo = extractUserInfo(samlObject);
 
@@ -64,10 +63,10 @@ module.exports.handler = async (event, context) => {
     return {
       statusCode: 301,
       headers: {
-          Location: `${relayState}?token=${encodeURIComponent(token)}`,
+        Location: `${relayState}?token=${encodeURIComponent(token)}`,
       }
     };
-  } catch(error) {
+  } catch (error) {
     console.error(error);
     return {
       statusCode: 500,
