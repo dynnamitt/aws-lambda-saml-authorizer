@@ -1,0 +1,10 @@
+# fill in the relevant values to bring with the lambdas
+
+JWT_SECRET=
+JWT_EXPIRATION_SECONDS=
+
+SAML_IDP_URL=
+SAML_CALLBACK_URL=
+
+IDENTITY_PROVIDER_ARN=
+ROLE_ARN=
